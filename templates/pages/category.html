@@ -17,6 +17,81 @@ category:
 
 {{#partial "page"}}
 
+
+<!-- CUSTOM CODE TO ADD BUTTON TO TOP OF PAGE -->
+<button type="button" id="addToCart">Add All to Cart</button>
+<script type="text/javascript" src="../assets/js/JQuery.js"></script>
+<script>
+
+
+function waitasec() {
+    var products = document.getElementsByClassName('card');
+
+    for (let i=0; i<products.length; i++) {
+        console.log(products[i].getAttribute('data-test'));
+
+    }
+
+
+    var productIDarray = [];
+    for (var i = 0; i < products.length; i++) {
+        productIDarray.push(products[i].getAttribute('data-test').substring(5));
+    }
+
+    console.error(productIDarray)
+
+
+        // when #addToCart is clicked...
+        $("button#addToCart").click(function() {
+
+            const control = async _ => {
+                for (var i = 0; i < productIDarray.length; i++) {
+                    console.log("adding product " + productIDarray[i] + " to cart...");
+
+                    var final = false;
+                    if (i == productIDarray.length - 1) final = true;
+
+                    await $.get("/cart.php?action=add&product_id=" + productIDarray[i])
+                    .done(function(data, status, xhr) {
+                        console.log('item complete with status ' + status);
+                        if (final == true) window.location = "/cart.php";
+                    })
+                    // chain more async GET requests using .then & .done
+                    .fail(function(xhr, status, error) {
+                        console.log('oh noes, error with status ' + status + ' and error: ');
+                        console.error(error);
+                        return xhr.done();
+                    })
+                    .fail(function(xhr, status, error) {
+                        console.log('oh noes, error with status ' + status + ' and error: ');
+                        console.error(error);
+                        return xhr.done();
+                    });
+                } // for
+            } // async
+            control();
+        });
+
+
+
+
+
+
+
+
+
+}
+
+setTimeout(waitasec.bind(this), 1000);
+
+
+
+
+
+
+
+</script>
+
 {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
 {{#if category.image}}
     {{> components/common/responsive-img

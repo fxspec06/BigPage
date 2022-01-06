@@ -1,0 +1,149 @@
+@ACCESS_TOKEN = rld6oxmrfyucpvkc4qcnhmcpzcgznyv
+@STORE_HASH = 2d9vfuxytm
+
+
+
+###
+
+
+// TEST -- GETS PRODUCT ARRAY LIST
+GET https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/products
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+
+
+###
+
+
+PUT https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/products/112
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "custom-url": ""
+}
+
+###
+
+
+
+// CREATE CATEGORY 'SPECIAL' WITH CUSTOM PARAMS
+POST https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/categories
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Special Items",
+  "parent_id": 0,
+  "description": "<p>Very unique items for special people.</p>",
+  "views": 0,
+  "sort_order": 1,
+  "meta_keywords": [],
+  "layout_file": "category.html",
+  "is_visible": true,
+  "default_product_sort": "use_store_settings",
+  "image_url": "https://cdn.britannica.com/q:60/53/212553-050-E4A98496/Baseball-bat.jpg",
+  "custom_url": {
+    "url": "/special/",
+    "is_customized": false
+  }
+}
+// *********** RUN ONCE
+
+
+###
+
+
+
+// update special category to new text because original wording was bad
+PUT https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/categories/24
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "description": "<p>Very special items for unique people.</p>"
+}
+
+
+
+###
+
+
+// LIST ARRAY OF CATEGORIES
+GET https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/categories/
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+
+
+###
+
+
+
+POST https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/products
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "Special Item",
+    "price": "10.00",
+    "categories": [
+        24
+    ],
+    "weight": 1,
+    "type": "physical",
+    "images": [
+        {
+            "image_url": "https://upload.wikimedia.org/wikipedia/en/1/1e/Baseball_%28crop%29.jpg",
+            "image_url": "https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw82199b5e/products/ROMLB-1.jpg"
+        }
+    ]
+}
+
+
+###
+
+
+// create product image
+PUT https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/products/112/images/376
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+{
+    "data-hoverimage": "https://www.rawlings.com/dw/image/v2/BBBJ_PRD/on/demandware.static/-/Sites-master-catalog/default/dw82199b5e/products/ROMLB-1.jpg"
+}
+
+
+###
+
+
+// get all images
+GET https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/products/112/images
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+
+###
+
+DELETE https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/products/112/custom-fields/1
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+
+###
+
+
+GET https://api.bigcommerce.com/stores/{{STORE_HASH}}/v3/catalog/products/112/custom-fields
+X-Auth-Token: {{ACCESS_TOKEN}}
+Content-Type: application/json
+Accept: application/json
+

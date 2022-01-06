@@ -66,13 +66,45 @@
            {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}
         >
             <div class="card-img-container">
-                {{> components/common/responsive-img
+
+                <!-- old code in case of revert
+
+                    {{> components/common/responsive-img
                     image=image
                     class="card-image"
                     fallback_size=theme_settings.productgallery_size
                     lazyload=theme_settings.lazyload_mode
                     default_image=theme_settings.default_image_product
-                }}
+                }}-->
+
+
+                <!-- load the image using custom code instead of included code,
+                    in order to show an alt image on mouseover. 
+                    i tried using JQuery, and got JQuery loading fine, but hover did nothing
+                -->
+                <img class="card-image lazyload" 
+                    data-sizes="auto" 
+                    src="{{cdn 'img/loading.svg'}}" 
+                    alt="{{image.alt}}" 
+                    title="{{image.alt}}"
+                    data-src="{{getImage image}}"
+                    data-hoverimage="{{#replace '{:size}' images.1.data}}500x659{{/replace}}{{getImage images.1.data 'productgallery_size' (cdn theme_settings.default_image_product)}}"> 
+                    
+                    <script>
+                        // CUSTOM CODE to add image hover to the data-src attribute if necessary
+                        var el = document.getElementsByClassName('card-image')[0]; // class card-figure did nothing here
+                        var mainsrc = el.getAttribute('data-src');
+                        var newsrc = el.getAttribute('data-hoverimage');
+
+                        // used mouseover and mouseout because hover did nothing
+                        el.addEventListener('mouseover', function() {
+                            el.setAttribute('src', newsrc);
+                        });
+                        el.addEventListener('mouseout', function(){
+                            el.setAttribute('src', mainsrc);
+                        });
+                    </script>
+
             </div>
         </a>
 

@@ -216,10 +216,12 @@
                 {{/if}}
 
                 {{#if theme_settings.show_custom_fields_tabs '!==' true}}
-                    {{#each product.custom_fields}}
-                        <dt class="productView-info-name">{{name}}:</dt>
-                        <dd class="productView-info-value">{{{ sanitize value}}}</dd>
-                    {{/each}}
+                    {{#unless name "Identifier Exists"}}
+                        {{#each product.custom_fields}}
+                            <dt class="productView-info-name">{{name}}:</dt>
+                            <dd class="productView-info-value">{{{ sanitize value}}}</dd>
+                        {{/each}}
+                    {{/unless}}
                 {{/if}}
             </dl>
         </div>

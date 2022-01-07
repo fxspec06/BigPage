@@ -56,6 +56,8 @@ https://github.com/fxspec06/BigPage/blob/master/bigcommerce.http
 </br>
 <h2>category.html ** major additions</h2>
 https://github.com/fxspec06/BigPage/blob/master/templates/pages/category.html
+
+
 ```
 <!-- CUSTOM CODE TO ADD BUTTONS TO TOP OF PAGE -->
 <div style="text-align:center; padding-bottom: 20px;">

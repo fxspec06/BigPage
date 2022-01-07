@@ -1,4 +1,5 @@
 <h1>BigCommerce Stencil Cornerstone Theme</br></h1>
+<h2>URL: <a href="https://bigstore4.mybigcommerce.com/">BigStore</a></h2>
 <h2>Preview code: p68n3l7sy8</h2>
 <p>
   <h2>card</h2>

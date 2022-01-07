@@ -3,10 +3,11 @@
 <h2>Preview code: p68n3l7sy8</h2>
 <p>
   <h2>card</h2>
-  URL: https://github.com/fxspec06/BigPage/blob/master/templates/components/products/card.html
   <ul>
+  <li>https://github.com/fxspec06/BigPage/blob/master/templates/components/products/card.html</li>
     <li>added image hover to the data-src attribute using data-hoverimage attribute</li>
     <li>added mouseover and mouseout functions (jquery hover was doing nothing)</li>
+    <li>had to use event mouseover and mouseout on the card class, and not card-figure, so hover doesn't change unless the mouse pointer is directly on the image</li>
   </ul>
   </p>
 </br>
@@ -15,8 +16,9 @@
 </br>
 <p>
 <h2>bigcommerce.http</h2>
-<ul><li>this file used to create requests used to create and update the entire store</li>
-  <li>https://github.com/fxspec06/BigPage/blob/master/bigcommerce.http</li>
+<ul><li>https://github.com/fxspec06/BigPage/blob/master/bigcommerce.http</li>
+  <li>this file used to create requests used to create and update the entire store</li>
+  <li>using the REST API in Visual Studio Code, you can click on the link above each command to run it, and VSCode displays the results neatly</li>
   </ul>
 </p>
 </br>
@@ -34,3 +36,10 @@
   <li>https://github.com/fxspec06/BigPage/blob/master/templates/pages/category.html</li>
 </ul>
   </p>
+<p>
+  <h2>base.html</h2>
+  <ul>
+  <li>https://github.com/fxspec06/BigPage/blob/master/templates/layout/base.html</li>
+  <li>added working jquery using external url</li>
+  </ul>
+</p>

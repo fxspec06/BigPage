@@ -1,5 +1,5 @@
 <h1>BigCommerce Stencil Cornerstone Theme</br></h1>
-<h2>-- preview code: p68n3l7sy8 --</h2>
+<h2>Preview code: p68n3l7sy8</h2>
 <p>
   <h2>card</h2>
   https://github.com/fxspec06/BigPage/blob/master/templates/components/products/card.html

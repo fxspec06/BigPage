@@ -67,20 +67,11 @@
         >
             <div class="card-img-container">
 
-                <!-- old code in case of revert
-
-                    {{> components/common/responsive-img
-                    image=image
-                    class="card-image"
-                    fallback_size=theme_settings.productgallery_size
-                    lazyload=theme_settings.lazyload_mode
-                    default_image=theme_settings.default_image_product
-                }}-->
-
-
                 <!-- load the image using custom code instead of included code,
                     in order to show an alt image on mouseover. 
                     i tried using JQuery, and got JQuery loading fine, but hover did nothing
+                    also, there's a bug where a product hover image may not be defined
+                    if to push to live, this would need to be fixed
                 -->
                 <img class="card-image lazyload" 
                     data-sizes="auto" 
@@ -104,7 +95,6 @@
                             el.setAttribute('src', mainsrc);
                         });
                     </script>
-
             </div>
         </a>
 

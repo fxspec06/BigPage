@@ -19,24 +19,41 @@ category:
 
 
 <!-- CUSTOM CODE TO ADD BUTTONS TO TOP OF PAGE -->
-<div style="text-align:center;">
+<div style="text-align:center; padding-bottom: 20px;">
     <button type="button" id="addToCart">Add All to Cart</button>
-    &nbsp;||&nbsp;
-    <button type="button" id="clearCart">Remove All Items</button>
+    <div id="clearCartWrapper" style="display: inline;">
+        &nbsp;/&nbsp;
+        <button type="button" id="clearCart">Remove All Items</button>
+    </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+    $('#clearCartWrapper').hide();
     // delay 1 second to allow the page to load so we can grab the classNames.
     // not sure how to get around this the best way
     function delay() {
-        var products = document.getElementsByClassName('card');
+        let products = document.getElementsByClassName('card');
         for (let i=0; i<products.length; i++) {
             console.log(products[i].getAttribute('data-test'));
         }
-        var productIDarray = [];
-        for (var i = 0; i < products.length; i++) {
+        let productIDarray = [];
+        for (let i = 0; i < products.length; i++) {
             productIDarray.push(products[i].getAttribute('data-test').substring(5));
         }
+        
+        // get the cart and cartId
+        fetch('/api/storefront/cart', {
+            'credentials':'include'
+        }).then(function(response) {
+            return response.json();
+        }).then( async function(cart) {
+            // only show the button if cart exists and there are items in it
+            $('#clearCartWrapper').show(cart[0].lineItems);
+        }).catch(function (error) {
+            $('#clearCartWrapper').hide();
+            console.error("failed to get cart");
+            console.error(error);
+        });
 
         // when #addToCart is clicked...
         $("button#addToCart").click(function() {
@@ -82,7 +99,7 @@ category:
                 // clear items
                 let cartId = cart[0].id
 
-                for (var i=0; i < basket.length; i++) {
+                for (let i=0; i < basket.length; i++) {
                     let item = basket[i];
                     let url = '/remote/v3/carts/' + cartId + '/items/' + item.id;
                     let final = false;

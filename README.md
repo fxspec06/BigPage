@@ -9,20 +9,10 @@
 </br>
 
 ```
-<a href="{{url}}"
-  class="card-figure__link"
-  aria-label="{{> components/products/product-info}}"
-  {{#if settings.data_tag_enabled}} data-event-type="product-click" {{/if}}
-  >
-  <div class="card-img-container">
-
-  <!-- load the image using custom code instead of included code,
-    in order to show an alt image on mouseover. 
-    i tried using JQuery, and got JQuery loading fine, but hover did nothing
-    also, there's a bug where a product hover image may not be defined
-    if to push to live, this would need to be fixed
-  -->
-  <img class="card-image lazyload" 
+<!-- load the image using custom code instead of included code,
+    in order to show an alt image on mouseover.
+-->
+<img class="card-image lazyload" 
     data-sizes="auto" 
     src="{{cdn 'img/loading.svg'}}" 
     alt="{{image.alt}}" 
@@ -31,10 +21,32 @@
     data-hoverimage="{{#replace '{:size}' images.1.data}}500x659{{/replace}}{{getImage images.1.data 'productgallery_size' (cdn theme_settings.default_image_product)}}"> 
 
     <script>
+
         // CUSTOM CODE to add image hover to the data-src attribute if necessary
         var el = document.getElementsByClassName('card-image')[0]; // class card-figure did nothing here
         var mainsrc = el.getAttribute('data-src');
         var newsrc = el.getAttribute('data-hoverimage');
+
+
+        /*
+            the following code should be updated in the future for allowing
+            hovering second image on hover of products other than the first product
+            i tried several ways and couldn't get it perfect in the timeframe
+        var storeurl = 'https://api.bigcommerce.com/stores/e0336893-e740-4017-9afc-64ccac281365/v3/catalog/products/{{id}}/images';
+            console.log("storeurl: " + storeurl);
+        $.get(storeurl, { // DOES NOT WORK. got to find a way to get the catalog images request.
+            'credentials':'include',
+        }).then(function(response) {
+            console.log(response);
+            return response.json();
+        }).then( async function(images) { 
+            // update the new image src to set the attribute later
+            newsrc = images[1].getAttribute('data-src'); // untested but should work
+        }).catch(function (error) {
+            console.error("failed to get images");
+            console.error(error);
+        });
+        */
 
         // used mouseover and mouseout because hover did nothing
         el.addEventListener('mouseover', function() {
@@ -47,14 +59,17 @@
 ```
 
 <h2>bigcommerce.http</h2>
-https://github.com/fxspec06/BigPage/blob/master/bigcommerce.http
 this file used to create requests used to create and update the entire store
 https://github.com/fxspec06/BigPage/blob/master/bigcommerce.http
-<ul>
-  <li>added additional protection for custom fields (may not be necessary)</li>
-</ul>
 </br>
-<h2>category.html ** major additions</h2>
+</br>
+</br>
+</br>
+<h2>category.html</h2>
+added two buttons to top of all category pages</br></br>
+the first is add all to cart, which always displays</br></br>
+the second is remove all from cart, which was a bit trickier to get working, but is dynamic in that it only displays if there are items in the cart
+for both of these buttons, the more items to add or remove, the longer, because jquery ajax only allows one instance at a time, and if you're adding 12 requests that's 12 times like .7 seconds. this is the best way (maybe the only way) to accomplish this i would think
 https://github.com/fxspec06/BigPage/blob/master/templates/pages/category.html
 
 

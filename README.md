@@ -1,6 +1,12 @@
 <h1>BigCommerce Stencil Cornerstone Theme</br></h1>
-<h2>URL: <a href="https://bigstore4.mybigcommerce.com/">BigPage</a></h2>
-<h2>Preview code: p68n3l7sy8</h2>
+<h1>oBundle JavaScript Project<h1>
+  <h2>A project completed by: Bryan Leasot</h2>
+  </br> </br> </br>
+  
+  
+  
+<h3>URL: <a href="https://bigstore4.mybigcommerce.com/">BigPage</a></h3>
+<h3>Preview code: p68n3l7sy8</h3>
 <p>
   <h2>card</h2>
   <ul>

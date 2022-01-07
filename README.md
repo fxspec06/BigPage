@@ -42,6 +42,10 @@
   <li>https://github.com/fxspec06/BigPage/blob/master/templates/pages/category.html</li>
 </ul>
   </p>
+  </br>
+</br>
+</br>
+</br>
 <p>
   <h2>base.html</h2>
   <ul>

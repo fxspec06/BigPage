@@ -68,10 +68,7 @@
             <div class="card-img-container">
 
                 <!-- load the image using custom code instead of included code,
-                    in order to show an alt image on mouseover. 
-                    i tried using JQuery, and got JQuery loading fine, but hover did nothing
-                    also, there's a bug where a product hover image may not be defined
-                    if to push to live, this would need to be fixed
+                    in order to show an alt image on mouseover.
                 -->
                 <img class="card-image lazyload" 
                     data-sizes="auto" 
@@ -80,12 +77,35 @@
                     title="{{image.alt}}"
                     data-src="{{getImage image}}"
                     data-hoverimage="{{#replace '{:size}' images.1.data}}500x659{{/replace}}{{getImage images.1.data 'productgallery_size' (cdn theme_settings.default_image_product)}}"> 
-                    
+
                     <script>
+
                         // CUSTOM CODE to add image hover to the data-src attribute if necessary
                         var el = document.getElementsByClassName('card-image')[0]; // class card-figure did nothing here
                         var mainsrc = el.getAttribute('data-src');
                         var newsrc = el.getAttribute('data-hoverimage');
+
+
+                        /*
+                            the following code should be updated in the future for allowing
+                            hovering second image on hover of products other than the first product
+                            i tried several ways and couldn't get it perfect in the timeframe
+
+                        var storeurl = 'https://api.bigcommerce.com/stores/e0336893-e740-4017-9afc-64ccac281365/v3/catalog/products/{{id}}/images';
+                            console.log("storeurl: " + storeurl);
+                        $.get(storeurl, { // DOES NOT WORK. got to find a way to get the catalog images request.
+                            'credentials':'include',
+                        }).then(function(response) {
+                            console.log(response);
+                            return response.json();
+                        }).then( async function(images) { 
+                            // update the new image src to set the attribute later
+                            newsrc = images[1].getAttribute('data-src'); // untested but should work
+                        }).catch(function (error) {
+                            console.error("failed to get images");
+                            console.error(error);
+                        });
+                        */
 
                         // used mouseover and mouseout because hover did nothing
                         el.addEventListener('mouseover', function() {
